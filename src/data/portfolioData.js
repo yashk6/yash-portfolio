@@ -18,6 +18,28 @@ export const portfolioData = {
   },
   projects: [
     {
+      id: 7,
+      title: "QR Hero",
+      featured: false,
+      description: "A premium, fully client-side QR Code Generator with multi-format support (Text/URL, WiFi, Email, SMS, Phone), custom color themes & presets, logo overlay embedding, error correction control, and instant PNG download. 100% local — no data leaves the browser.",
+      date: "June 2026",
+      tags: ["HTML5", "CSS3", "JavaScript", "QR Code", "Client-Side", "Lucide Icons"],
+      liveUrl: "https://qr-code-generator-one-fawn.vercel.app/",
+      githubUrl: "https://github.com/yashk6/QR-code-generator",
+      image: "/projects/qr_hero.png"
+    },
+    {
+      id: 6,
+      title: "PopX Login",
+      featured: false,
+      description: "PopX is a mobile UI assignment built using React 18 and Vite. It consists of four screens — Welcome, Login, Create Account, and Account Settings — connected using React Router DOM v6 for smooth navigation. The UI follows a mobile‑first design (375px) with a purple color theme (#6c25ff), floating label inputs, and a login button that activates only when both fields are filled. All styling is done in plain CSS without any framework.",
+      date: "7 June 2026",
+      tags: ["React", "Vite", "React Router DOM", "CSS", "Mobile UI"],
+      liveUrl: "https://pop-x-assignment-nine-black.vercel.app/",
+      githubUrl: "https://github.com/yashk6/PopX-Assignment",
+      image: "/projects/popx.png"
+    },
+    {
       id: 5,
       title: "Store Rating & Reviews Portal",
       featured: true,
@@ -27,28 +49,6 @@ export const portfolioData = {
       liveUrl: "https://store-rating-portal-gll3.vercel.app/",
       githubUrl: "https://github.com/yashk6/store-rating-portal",
       image: "/projects/store_rating_portal.png"
-    },
-    {
-      id: 1,
-      title: "CareerForge Pro",
-      featured: true,
-      description: "AI-powered ATS Resume Optimizer & Job Matcher with NLP/LLM, ATS scoring, AI rewriting, Stripe subscription, and PDF export.",
-      date: "Feb 2026 – Mar 2026",
-      tags: ["React.js", "NLP/LLM", "Stripe", "PDF Gen", "Full Stack"],
-      liveUrl: "https://career-forge-pro-gamma.vercel.app/",
-      githubUrl: "https://github.com/yashk6/Career-ForgePro",
-      image: "/projects/career_forge_pro.png"
-    },
-    {
-      id: 2,
-      title: "Yash Finance Dashboard",
-      featured: false,
-      description: "A full-featured finance dashboard with budget management, analytics, transaction tracking, and CSV/JSON export. Ghost black aesthetic with Tailwind CSS.",
-      date: "Apr 2026",
-      tags: ["React.js", "Tailwind CSS", "Analytics", "CSV Export"],
-      liveUrl: "https://yash-finance-git-main-yashs-projects-083d382b.vercel.app/dashboard",
-      githubUrl: "https://github.com/yashk6/Yash_Finance_Dashboard",
-      image: "/projects/yash_finance_dashboard.png"
     },
     {
       id: 4,
@@ -62,15 +62,26 @@ export const portfolioData = {
       image: "/projects/ai_document_intelligence.png"
     },
     {
-      id: 6,
-      title: "PopX Login",
+      id: 2,
+      title: "Yash Finance Dashboard",
       featured: false,
-      description: "PopX is a mobile UI assignment built using React 18 and Vite. It consists of four screens — Welcome, Login, Create Account, and Account Settings — connected using React Router DOM v6 for smooth navigation. The UI follows a mobile‑first design (375px) with a purple color theme (#6c25ff), floating label inputs, and a login button that activates only when both fields are filled. All styling is done in plain CSS without any framework.",
-      date: "7 June 2026",
-      tags: ["React", "Vite", "React Router DOM", "CSS", "Mobile UI"],
-      liveUrl: "https://pop-x-assignment-nine-black.vercel.app/",
-      githubUrl: "https://github.com/yashk6/PopX-Assignment",
-      image: "/projects/popx.png"
+      description: "A full-featured finance dashboard with budget management, analytics, transaction tracking, and CSV/JSON export. Ghost black aesthetic with Tailwind CSS.",
+      date: "Apr 2026",
+      tags: ["React.js", "Tailwind CSS", "Analytics", "CSV Export"],
+      liveUrl: "https://yash-finance-git-main-yashs-projects-083d382b.vercel.app/dashboard",
+      githubUrl: "https://github.com/yashk6/Yash_Finance_Dashboard",
+      image: "/projects/yash_finance_dashboard.png"
+    },
+    {
+      id: 1,
+      title: "CareerForge Pro",
+      featured: true,
+      description: "AI-powered ATS Resume Optimizer & Job Matcher with NLP/LLM, ATS scoring, AI rewriting, Stripe subscription, and PDF export.",
+      date: "Feb 2026 – Mar 2026",
+      tags: ["React.js", "NLP/LLM", "Stripe", "PDF Gen", "Full Stack"],
+      liveUrl: "https://career-forge-pro-gamma.vercel.app/",
+      githubUrl: "https://github.com/yashk6/Career-ForgePro",
+      image: "/projects/career_forge_pro.png"
     },
   ],
   experience: [
