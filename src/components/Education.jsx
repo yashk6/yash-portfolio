@@ -47,16 +47,24 @@ const Education = () => {
 
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-[#39FF14]/40 via-[#39FF14]/15 to-transparent" />
+              <div className="absolute left-4 top-0 bottom-0 w-px bg-white/05">
+                <motion.div
+                  initial={{ height: 0 }}
+                  whileInView={{ height: '100%' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.0, ease: 'easeOut' }}
+                  className="w-full bg-gradient-to-b from-[#39FF14] to-transparent"
+                />
+              </div>
 
               <div className="space-y-6">
                 {education.degrees.map((degree, idx) => (
                   <motion.div
                     key={degree.id}
-                    initial={{ opacity: 0, x: -25 }}
+                    initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.15 }}
+                    transition={{ type: 'spring', stiffness: 100, damping: 15, delay: idx * 0.12 }}
                     className="relative pl-12 group"
                   >
                     {/* Timeline dot */}
@@ -65,7 +73,10 @@ const Education = () => {
                     </div>
 
                     {/* Card */}
-                    <div className="glass-card rounded-2xl p-6 border border-[var(--color-border)] group-hover:border-[var(--color-primary)]/25 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(57,255,20,0.06)]">
+                    <motion.div
+                      whileHover={{ y: -4, borderColor: 'rgba(57,255,20,0.3)', boxShadow: '0 8px 32px rgba(57,255,20,0.06)' }}
+                      className="glass-card rounded-2xl p-6 border border-[var(--color-border)] transition-all duration-300"
+                    >
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
@@ -81,7 +92,7 @@ const Education = () => {
                           <span className="font-fira text-xs text-[var(--color-primary)]">{degree.score}</span>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -110,8 +121,9 @@ const Education = () => {
                   initial={{ opacity: 0, x: 25 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.12 }}
-                  className="glass-card rounded-2xl p-5 border border-[var(--color-border)] flex items-center justify-between gap-4 hover:border-[var(--color-primary)]/25 hover:translate-x-1 transition-all duration-300 group"
+                  transition={{ type: 'spring', stiffness: 120, damping: 16, delay: idx * 0.08 }}
+                  whileHover={{ scale: 1.02, x: 6, borderColor: 'rgba(57,255,20,0.3)', boxShadow: '0 8px 24px rgba(57,255,20,0.04)' }}
+                  className="glass-card rounded-2xl p-5 border border-[var(--color-border)] flex items-center justify-between gap-4 transition-all duration-300 group cursor-pointer"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-[var(--color-primary)]/08 border border-[var(--color-primary)]/20 flex items-center justify-center shrink-0 group-hover:bg-[var(--color-primary)]/15 transition-colors">

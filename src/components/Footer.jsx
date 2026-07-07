@@ -18,8 +18,8 @@ const Footer = () => {
       {/* Top gradient fade */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/30 to-transparent" />
 
-      <div className="container mx-auto px-6 max-w-6xl py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
 
           {/* Brand */}
           <div>
@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/05">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-[var(--color-border)]">
           <p className="font-fira text-xs text-[var(--color-text-muted)]">
             © {year} Yash Sachin Kalyani — Built with{' '}
             <span className="text-[var(--color-primary)]">React</span> +{' '}
@@ -80,15 +80,15 @@ const Footer = () => {
 
           <div className="flex items-center gap-4">
             <a href={personal.linkedin} target="_blank" rel="noreferrer"
-              className="w-9 h-9 rounded-lg border border-white/08 flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
+              className="w-9 h-9 rounded-lg border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
               <Linkedin size={16} />
             </a>
             <a href="https://github.com" target="_blank" rel="noreferrer"
-              className="w-9 h-9 rounded-lg border border-white/08 flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
+              className="w-9 h-9 rounded-lg border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
               <Github size={16} />
             </a>
             <a href={`mailto:${personal.email}`}
-              className="w-9 h-9 rounded-lg border border-white/08 flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
+              className="w-9 h-9 rounded-lg border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all">
               <Mail size={16} />
             </a>
 

@@ -83,17 +83,17 @@ const Hero = () => {
       <div className="scanline z-0" />
 
       {/* Content */}
-      <div className="container mx-auto px-6 max-w-6xl relative z-10 pt-28 pb-32 sm:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10 pt-24 sm:pt-28 pb-20 sm:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left column */}
-          <div>
+          <div className="text-center lg:text-left">
             {/* Status badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/05 mb-8"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/05 mb-6 sm:mb-8"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] animate-pulse-neon" />
               <span className="font-fira text-[var(--color-primary)] text-sm">{personal.status}</span>
@@ -109,16 +109,32 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.12,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="visible"
               className="font-bebas text-white leading-none tracking-wide mb-4"
-              style={{ fontSize: 'clamp(60px, 9vw, 110px)' }}
+              style={{ fontSize: 'clamp(48px, 9vw, 110px)' }}
             >
               {personal.name.split(' ').map((word, i) => (
-                <span key={i} className={i === 1 ? 'text-[var(--color-primary)] neon-text' : ''}>
-                  {word}{' '}
-                </span>
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 15 } }
+                  }}
+                  className={`inline-block ${i === 1 || i === 2 ? 'text-[var(--color-primary)] neon-text' : ''}`}
+                >
+                  {word}&nbsp;
+                </motion.span>
               ))}
             </motion.h1>
 
@@ -127,7 +143,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center gap-2 mb-6 text-xl sm:text-2xl font-outfit font-light text-[#ececec]/80"
+              className="flex items-center justify-center lg:justify-start gap-2 mb-6 text-lg sm:text-2xl font-outfit font-light text-[#ececec]/80"
             >
               <span className="text-[var(--color-primary)] font-semibold">{typewrittenText}</span>
               <span className="cursor-blink text-[var(--color-primary)] font-light">|</span>
@@ -147,7 +163,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="flex flex-wrap gap-4 mb-12"
+              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-10 sm:mb-12"
             >
               <a
                 href="#projects"
@@ -174,7 +190,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.1 }}
-              className="flex justify-between sm:justify-start items-start sm:items-center gap-2 sm:gap-8 border-t border-white/5 pt-8"
+              className="flex justify-center lg:justify-start items-center gap-8 sm:gap-12 border-t border-white/5 pt-8"
             >
               {STATS.map((stat, i) => (
                 <div key={i} className="text-center">
@@ -194,7 +210,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="hidden lg:flex justify-center items-center"
+            className="flex justify-center items-center order-first lg:order-none"
           >
             <div className="relative">
               {/* Spinning orbit ring */}
@@ -202,39 +218,48 @@ const Hero = () => {
               <div className="absolute inset-0 rounded-full border border-[var(--color-primary)]/08 scale-125" style={{ animation: 'spin-slow 30s linear infinite reverse' }} />
 
               {/* Avatar */}
-              <div className="w-72 h-72 rounded-full gradient-border relative overflow-hidden shadow-[0_0_60px_rgba(57,255,20,0.2)]">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-[#111] via-[#0d0d0d] to-[#070707] flex items-center justify-center">
-                  <img
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                className="w-44 h-44 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full gradient-border relative overflow-hidden shadow-[0_0_60px_rgba(57,255,20,0.2)]"
+              >
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-[#111] via-[#0d0d0d] to-[#070707] flex items-center justify-center overflow-hidden">
+                  <motion.img
                     src="/yash.jpg"
                     alt={personal.name}
                     className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.4 }}
                   />
                 </div>
-              </div>
+              </motion.div>
 
               {/* Floating chips */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -right-8 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2"
+                animate={{ y: [0, -10, 0], rotate: [0, 2, -2, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={{ scale: 1.1, rotate: 0, zIndex: 30 }}
+                className="absolute -top-4 -right-8 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2 cursor-pointer select-none"
               >
                 <span className="text-[var(--color-primary)]">⚡</span>
                 <span className="font-fira text-xs text-[var(--color-text-main)]">React.js</span>
               </motion.div>
 
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 -left-8 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2"
+                animate={{ y: [0, 12, 0], rotate: [0, -2, 2, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                whileHover={{ scale: 1.1, rotate: 0, zIndex: 30 }}
+                className="absolute -bottom-4 -left-8 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2 cursor-pointer select-none"
               >
                 <span className="text-[var(--color-primary)]">🚀</span>
                 <span className="font-fira text-xs text-[var(--color-text-main)]">Open to Work</span>
               </motion.div>
 
               <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute top-1/2 -right-16 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2"
+                animate={{ y: [0, -8, 0], rotate: [0, 3, -1, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                whileHover={{ scale: 1.1, rotate: 0, zIndex: 30 }}
+                className="absolute top-1/2 -right-16 glass-card px-4 py-2 rounded-xl border border-[var(--color-primary)]/20 flex items-center gap-2 cursor-pointer select-none"
               >
                 <span className="text-[var(--color-primary)]">🎯</span>
                 <span className="font-fira text-xs text-[var(--color-text-main)]">Frontend</span>
@@ -252,8 +277,21 @@ const Hero = () => {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
-        <span className="font-fira text-[11px] text-[var(--color-text-muted)] uppercase tracking-[0.2em]">Scroll</span>
-        <div className="w-[1px] h-10 bg-gradient-to-b from-[var(--color-primary)]/50 to-transparent" />
+        <span className="font-fira text-[11px] text-[var(--color-text-muted)] uppercase tracking-[0.2em] mb-1">Scroll</span>
+        <div className="w-5 h-8 rounded-full border border-white/20 flex justify-center p-1.5">
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+              opacity: [1, 0.4, 1]
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="w-1 h-1.5 rounded-full bg-[var(--color-primary)]"
+          />
+        </div>
       </motion.div>
     </section>
   );

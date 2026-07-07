@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 
 // Skill proficiency levels (%)
@@ -39,23 +39,31 @@ const TECH_LOGOS = [
 ];
 
 const SkillBar = ({ name, level }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
-    <div ref={ref} className="group">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="font-outfit text-sm text-[#ccc] group-hover:text-[#39FF14] transition-colors">{name}</span>
-        <span className="font-fira text-xs text-[#555]">{level}%</span>
+    <div className="group mb-5">
+      <div className="flex justify-between items-center mb-2">
+        <span className="font-outfit text-sm text-[var(--color-text-main)] group-hover:text-[var(--color-primary)] transition-colors">{name}</span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="font-fira text-xs text-[var(--color-text-muted)] group-hover:text-[var(--color-text-main)] transition-colors"
+        >
+          {level}%
+        </motion.span>
       </div>
-      <div className="skill-bar-track">
-        <div
-          className="skill-bar-fill"
-          style={{
-            width: isInView ? `${level}%` : '0%',
-            transition: 'width 1.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        />
+      <div className="skill-bar-track relative w-full">
+        <motion.div
+          className="skill-bar-fill relative flex items-center"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 50, damping: 15 }}
+        >
+          {/* Glowing dot tracker */}
+          <div className="absolute right-0 translate-x-1/2 w-3 h-3 bg-[var(--color-background)] rounded-full border-2 border-[var(--color-primary)] shadow-[0_0_10px_var(--color-primary-glow)] group-hover:scale-125 transition-transform duration-300" />
+        </motion.div>
       </div>
     </div>
   );
@@ -72,13 +80,13 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-32 relative overflow-hidden">
+    <section id="skills" className="py-20 sm:py-32 relative overflow-hidden">
       {/* Subtle bg */}
-      <div className="absolute inset-0 bg-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-[var(--color-surface)] transition-colors duration-500" />
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="orb orb-blue w-[500px] h-[500px] -left-40 top-1/3 opacity-25" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,25 +96,26 @@ const Skills = () => {
           className="mb-16"
         >
           <div className="section-label mb-4">Technical Arsenal</div>
-          <h2 className="font-bebas text-white leading-none" style={{ fontSize: 'clamp(40px, 6vw, 68px)' }}>
-            Skills & <span className="text-[#39FF14]">Technologies</span>
+          <h2 className="font-bebas text-[var(--color-text-main)] leading-none" style={{ fontSize: 'clamp(40px, 6vw, 68px)' }}>
+            Skills & <span className="text-[var(--color-primary)]">Technologies</span>
           </h2>
         </motion.div>
 
         {/* Skill bars grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-6 sm:gap-y-12 mb-14 sm:mb-20">
           {categories.map((cat, ci) => (
             <motion.div
               key={ci}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: ci * 0.1 }}
-              className="glass-card rounded-2xl p-7 border border-white/05 hover:border-[#39FF14]/20 transition-all"
+              transition={{ type: 'spring', stiffness: 100, damping: 18, delay: ci * 0.08 }}
+              whileHover={{ y: -6, borderColor: 'var(--color-primary-glow)', boxShadow: '0 12px 30px var(--color-primary-subtle)' }}
+              className="glass-card rounded-2xl p-7 transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{cat.icon}</span>
-                <h3 className="font-outfit font-bold text-[#ececec] text-lg">{cat.title}</h3>
+                <h3 className="font-outfit font-bold text-[var(--color-text-main)] text-lg">{cat.title}</h3>
               </div>
               <div className="space-y-4">
                 {cat.skills.map((skill, i) => (
@@ -125,13 +134,17 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="section-label mb-6 justify-center">Also Comfortable With</div>
-          <div className="relative overflow-hidden border border-white/05 rounded-2xl bg-[#0d0d0d] py-5">
+          <div className="relative overflow-hidden border border-[var(--color-border)] rounded-2xl bg-[var(--color-surface-2)] py-5 transition-colors duration-500">
             <div className="flex gap-8 animate-ticker whitespace-nowrap">
               {[...TECH_LOGOS, ...TECH_LOGOS].map((t, i) => (
-                <div key={i} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/05 bg-white/02 shrink-0 hover:border-[#39FF14]/30 hover:bg-[#39FF14]/05 transition-all cursor-default group">
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] shrink-0 hover:border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/05 transition-all cursor-pointer group select-none"
+                >
                   <span className="text-lg">{t.emoji}</span>
-                  <span className="font-outfit text-sm text-[#666] group-hover:text-[#39FF14] transition-colors">{t.name}</span>
-                </div>
+                  <span className="font-outfit text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">{t.name}</span>
+                </motion.div>
               ))}
             </div>
           </div>

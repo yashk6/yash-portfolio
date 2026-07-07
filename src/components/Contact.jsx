@@ -52,14 +52,14 @@ const Contact = () => {
   ];
 
   const inputClass =
-    'w-full bg-[#0d0d0d] border border-white/08 rounded-xl px-4 py-3.5 text-[#ececec] font-outfit text-sm placeholder:text-[#444] focus:outline-none focus:border-[#39FF14]/50 focus:ring-1 focus:ring-[#39FF14]/20 transition-all duration-300 hover:border-white/15';
+    'w-full bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-xl px-4 py-3.5 text-[var(--color-text-main)] font-outfit text-sm placeholder:text-[var(--color-text-dim)] focus:outline-none focus:border-[#39FF14]/50 focus:ring-1 focus:ring-[#39FF14]/20 transition-all duration-300 hover:border-[var(--color-border)]';
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
+    <section id="contact" className="py-20 sm:py-32 relative overflow-hidden">
       <div className="orb orb-green w-[600px] h-[600px] -left-40 top-1/2 -translate-y-1/2 opacity-20" />
       <div className="orb orb-blue w-[400px] h-[400px] right-0 bottom-0 opacity-15" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         {/* Header */}
         <motion.div
@@ -70,7 +70,7 @@ const Contact = () => {
           className="mb-16 text-center"
         >
           <div className="section-label mb-4 justify-center">Get In Touch</div>
-          <h2 className="font-bebas text-white leading-none mb-4" style={{ fontSize: 'clamp(40px, 7vw, 80px)' }}>
+          <h2 className="font-bebas text-[var(--color-text-main)] leading-none mb-4" style={{ fontSize: 'clamp(32px, 7vw, 80px)' }}>
             Let's Build Something <span className="text-[#39FF14]">Together</span>
           </h2>
           <p className="font-outfit text-[#666] max-w-lg mx-auto text-base">
@@ -94,11 +94,12 @@ const Contact = () => {
               const content = (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="glass-card p-5 rounded-2xl border border-white/06 flex items-center gap-4 hover:border-[#39FF14]/25 transition-all group cursor-pointer"
+                  transition={{ type: 'spring', stiffness: 140, damping: 15, delay: i * 0.08 }}
+                  whileHover={{ scale: 1.03, borderColor: '#39FF14' }}
+                  className="glass-card p-5 rounded-2xl border border-[var(--color-border)] flex items-center gap-4 transition-all duration-300 group cursor-pointer"
                 >
                   <div className="w-11 h-11 rounded-xl bg-[#39FF14]/08 border border-[#39FF14]/20 flex items-center justify-center text-[#39FF14] shrink-0 group-hover:bg-[#39FF14]/15 group-hover:scale-110 transition-all duration-300">
                     {item.icon}
@@ -140,13 +141,13 @@ const Contact = () => {
 
           {/* ── Right: Form ───────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30, scale: 0.98 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: 'spring', stiffness: 90, damping: 16 }}
             className="lg:col-span-3"
           >
-            <div className="glass-card p-8 rounded-2xl border border-white/08 hover:border-white/12 transition-all">
+            <div className="glass-card p-8 rounded-2xl transition-all duration-300">
               <h3 className="font-outfit font-bold text-[#ececec] text-lg mb-1">Send a Message</h3>
               <p className="font-outfit text-xs text-[#555] mb-8">Usually respond within 24 hours.</p>
 
@@ -233,10 +234,12 @@ const Contact = () => {
                   </motion.div>
                 )}
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 bg-[#39FF14] text-[#070707] font-outfit font-bold py-4 rounded-xl hover:shadow-[0_0_30px_rgba(57,255,20,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] group"
+                  whileHover={{ scale: 1.01, boxShadow: '0 0 30px rgba(57,255,20,0.45)' }}
+                  whileTap={{ scale: 0.99 }}
+                  className="w-full flex items-center justify-center gap-2 bg-[#39FF14] text-[#070707] font-outfit font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
@@ -249,7 +252,7 @@ const Contact = () => {
                       <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </>
                   )}
-                </button>
+                </motion.button>
               </form>
             </div>
           </motion.div>

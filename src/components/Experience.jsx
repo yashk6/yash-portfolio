@@ -7,11 +7,11 @@ const Experience = () => {
   const { experience } = portfolioData;
 
   return (
-    <section id="experience" className="py-32 relative overflow-hidden">
+    <section id="experience" className="py-20 sm:py-32 relative overflow-hidden">
       <div className="orb orb-green w-[500px] h-[500px] -right-20 top-1/4 opacity-25" />
       <div className="orb orb-purple w-[350px] h-[350px] left-0 bottom-1/4 opacity-20" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,25 +28,42 @@ const Experience = () => {
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--color-primary)]/40 via-[var(--color-primary)]/10 to-transparent transform md:-translate-x-1/2 hidden sm:block" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-white/05 transform md:-translate-x-1/2 hidden sm:block">
+            <motion.div
+              initial={{ height: 0 }}
+              whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
+              className="w-full bg-gradient-to-b from-[var(--color-primary)] via-[var(--color-primary)]/50 to-transparent"
+            />
+          </div>
 
           <div className="space-y-12">
             {experience.map((item, idx) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className={`relative flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                initial={{ opacity: 0, x: idx % 2 === 0 ? -45 : 45 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ type: 'spring', stiffness: 90, damping: 18, delay: idx * 0.15 }}
+                className={`relative flex flex-col items-start gap-4 sm:gap-8 pl-6 sm:pl-0 md:flex-row md:items-center ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-primary)] neon-border transform -translate-x-1/2 top-0 mt-8 hidden sm:block z-20" />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', stiffness: 180, damping: 10, delay: idx * 0.15 + 0.3 }}
+                  className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-primary)] neon-border transform -translate-x-1/2 top-0 mt-6 sm:mt-8 hidden sm:block z-20"
+                />
 
                 {/* Content Card */}
                 <div className={`w-full md:w-[calc(50%-2rem)] flex ${idx % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                  <div className="glass-card p-8 rounded-2xl border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all duration-500 group w-full">
-                    <div className="flex items-start justify-between mb-4">
+                  <motion.div
+                    whileHover={{ y: -5, borderColor: 'rgba(57,255,20,0.35)', boxShadow: '0 12px 30px rgba(57,255,20,0.06)' }}
+                    className="glass-card p-5 sm:p-8 rounded-2xl border border-[var(--color-border)] transition-all duration-300 group w-full"
+                  >
+                    <div className="flex flex-wrap items-start justify-between mb-4 gap-3">
                       <div>
                         <div className="flex items-center gap-2 text-[var(--color-primary)] mb-2">
                           <Building2 size={16} />
@@ -83,7 +100,7 @@ const Experience = () => {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Vertical Decorative Element for Mobile */}

@@ -14,11 +14,11 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
+    <section id="about" className="py-20 sm:py-32 relative overflow-hidden">
       {/* Ambient */}
       <div className="orb orb-green w-[500px] h-[500px] -right-40 top-1/2 -translate-y-1/2 opacity-30" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         {/* Section label */}
         <motion.div
@@ -34,7 +34,7 @@ const About = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mt-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mt-10 sm:mt-16 items-start">
 
           {/* Left: bio + chips — 3 cols */}
           <motion.div
@@ -57,10 +57,11 @@ const About = () => {
               {highlights.map((h, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+                  transition={{ type: 'spring', stiffness: 150, damping: 15, delay: 0.15 + i * 0.08 }}
+                  whileHover={{ scale: 1.03, borderColor: 'rgba(57,255,20,0.3)', boxShadow: '0 8px 30px rgba(57,255,20,0.04)' }}
                   className="flex items-center gap-3 p-4 glass-card rounded-xl border border-[var(--color-border)] hover:border-[var(--color-primary)]/25 transition-all group"
                 >
                   <div className="text-[var(--color-primary)] shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
@@ -76,14 +77,15 @@ const About = () => {
 
             {/* Fun fact chips */}
             <div className="flex flex-wrap gap-2">
-              {personal.funFacts.map((fact, i) => (
+               {personal.funFacts.map((fact, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
-                  className="px-4 py-1.5 rounded-full text-sm font-outfit font-medium text-[var(--color-text-muted)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-all cursor-default"
+                  transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.3 + i * 0.05 }}
+                  whileHover={{ scale: 1.08, rotate: i % 2 === 0 ? 1.5 : -1.5, borderColor: 'rgba(57,255,20,0.4)', color: '#39FF14' }}
+                  className="px-4 py-1.5 rounded-full text-sm font-outfit font-medium text-[var(--color-text-muted)] border border-[var(--color-border)] bg-[var(--color-surface)] transition-all cursor-default select-none"
                 >
                   {fact}
                 </motion.div>
@@ -93,13 +95,14 @@ const About = () => {
 
           {/* Right: terminal card — 2 cols */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-2"
+            transition={{ type: 'spring', stiffness: 100, damping: 18, delay: 0.3 }}
+            whileHover={{ y: -5 }}
+            className="lg:col-span-2 order-first lg:order-last"
           >
-            <div className="glass-card rounded-2xl overflow-hidden border border-white/08 hover:border-[#39FF14]/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(57,255,20,0.08)]">
+            <div className="glass-card rounded-2xl overflow-hidden border border-white/08 hover:border-[#39FF14]/30 transition-all duration-500">
               {/* Terminal header */}
               <div className="bg-[#0d0d0d] px-5 py-3 flex items-center gap-3 border-b border-white/05">
                 <div className="flex gap-1.5">

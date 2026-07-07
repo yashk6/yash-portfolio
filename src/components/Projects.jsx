@@ -15,15 +15,16 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
       variants={{
-        hidden: { y: 30, opacity: 0 },
-        visible: { y: 0, opacity: 1, transition: { duration: 0.6 } },
+        hidden: { y: 35, opacity: 0 },
+        visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 90, damping: 16 } },
       }}
-      className="relative glass-card rounded-2xl overflow-hidden flex flex-col group transition-all duration-500 hover:-translate-y-2 lg:hover:shadow-2xl"
+      whileHover={{ y: -8, borderColor: color.accent, boxShadow: `0 15px 35px ${color.bg}` }}
+      className="relative glass-card rounded-2xl overflow-hidden flex flex-col group transition-all duration-300"
       style={{
         '--color-border': color.border,
         '--color-bg': color.bg,
         '--color-accent': color.accent,
-        borderColor: 'rgba(255,255,255,0.06)'
+        borderColor: 'var(--color-border)'
       }}
     >
       {/* Top gradient bar */}
@@ -40,7 +41,7 @@ const ProjectCard = ({ project, index }) => {
           <img
             src={project.image}
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-75 transition-all duration-500 group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-75 transition-all duration-700 group-hover:scale-108"
           />
         ) : (
           <>
@@ -107,7 +108,7 @@ const ProjectCard = ({ project, index }) => {
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-outfit font-bold text-sm border text-[#ececec] hover:text-white transition-all sm:translate-y-0 translate-y-2 lg:translate-y-4 lg:group-hover:translate-y-0"
-              style={{ borderColor: 'rgba(255,255,255,0.15)' }}
+              style={{ borderColor: 'var(--color-border)' }}
             >
               <Github size={14} /> Code
             </a>
@@ -150,12 +151,13 @@ const ProjectCard = ({ project, index }) => {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 relative z-30">
           {project.tags.map((tag, i) => (
-            <span
+            <motion.span
               key={i}
-              className="flex items-center gap-1 text-xs font-fira px-2.5 py-1 rounded-md transition-colors bg-[var(--color-bg)] text-[#666] border-transparent group-hover:text-[var(--color-accent)] group-hover:border-[var(--color-border)] border"
+              whileHover={{ scale: 1.08, borderColor: color.accent, color: color.accent }}
+              className="flex items-center gap-1 text-xs font-fira px-2.5 py-1 rounded-md transition-colors bg-[var(--color-bg)] text-[#666] border-transparent border cursor-pointer select-none"
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>
@@ -167,11 +169,11 @@ const Projects = () => {
   const { projects } = portfolioData;
 
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
+    <section id="projects" className="py-20 sm:py-32 relative overflow-hidden">
       <div className="orb orb-purple w-[500px] h-[500px] -right-20 top-1/4 opacity-25" />
       <div className="orb orb-green w-[350px] h-[350px] left-0 bottom-1/4 opacity-20" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -182,7 +184,7 @@ const Projects = () => {
         >
           <div>
             <div className="section-label mb-4">What I've Built</div>
-            <h2 className="font-bebas text-white leading-none" style={{ fontSize: 'clamp(40px, 6vw, 68px)' }}>
+            <h2 className="font-bebas text-[var(--color-text-main)] leading-none" style={{ fontSize: 'clamp(36px, 6vw, 68px)' }}>
               Featured <span className="text-[#39FF14]">Projects</span>
             </h2>
           </div>
@@ -218,7 +220,7 @@ const Projects = () => {
             href="https://github.com"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/10 rounded-xl font-outfit font-semibold text-[#777] hover:border-[#39FF14]/40 hover:text-[#39FF14] transition-all group"
+            className="inline-flex items-center gap-2 px-8 py-3.5 border border-[var(--color-border)] rounded-xl font-outfit font-semibold text-[var(--color-text-muted)] hover:border-[#39FF14]/40 hover:text-[#39FF14] transition-all group"
           >
             <Github size={18} />
             View All on GitHub
